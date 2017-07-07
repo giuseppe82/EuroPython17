@@ -43,7 +43,7 @@
 \usepackage{xcolor}
 \usepackage[]{fontawesome}
 \usepackage{chemfig}
-
+\usepackage[pstricks]{bclogo}
 \usepackage{siunitx}
 \usepackage[version=3]{mhchem}
 \usepackage[compatibility=false]{caption}
@@ -116,12 +116,24 @@
 }
 
 \newcommand{\pytex}{Python\TeX}
-\setbeamertemplate{caption}{\insertcaption}
-\pgfdeclareimage[height=0.8cm]{le-logo}{pics/Logo_MPCDF.png}
-\logo{\pgfuseimage{le-logo}}
+%\setbeamertemplate{caption}{\insertcaption}
+%\pgfdeclareimage[height=0.8cm]{le-logo}{pics/Logo_MPCDF.png}
+%\logo{\pgfuseimage{le-logo}}
+
 \beamertemplatenavigationsymbolsempty
 % logo of the conference
-\titlegraphic{\includegraphics[width=3cm]{pics/EuroPython2017_logo.jpeg}\hspace*{8.75cm}\vspace*{5.5cm}}
+\titlegraphic{\includegraphics[width=3cm]{pics/EuroPython2017_logo.jpeg}\hspace*{5.75cm}\vspace*{3.5cm}~%
+                \includegraphics[height=0.8cm]{pics/Logo_MPCDF.png}}
+
+\newenvironment<>{varblock}[2][.7\textwidth]{%
+  \setlength{\textwidth}{#1}
+  \begin{actionenv}#3%
+    \def\insertblocktitle{#2}%
+    \par%
+    \usebeamertemplate{block begin}}
+  {\par%
+    \usebeamertemplate{block end}%
+  \end{actionenv}}
 
 %------------------------------------------------------------------------
 %	TITLE PAGE
@@ -132,11 +144,12 @@
 
 \author{\textit{\bf Giuseppe Di Bernardo}} % Your name
 \institute[{\sc MPCDF}] % Your institution as it will appear on the bottom of every slide, may be shorthand to save space
-{
-{\sc Max Planck Computing and Data Facility} (\href{mpcdf.mpg.de}{MPCDF})\\ % Your institution for the title page
-\medskip
-\href{giuseppe.di-bernardo@mpcdf.mpg.de}{\textit{giuseppe.di-bernardo@mpcdf.mpg.de}}\\ % Your email address
-\raisebox{-.25\height}{\includegraphics[width=.5cm]{pics/twitter-icon-circle-blue-logo-preview.png}}\href{https://twitter.com/jose_dibernardo}{\textit{@jose\_dibernardo}} % Your twitter account
+    {
+        {\sc Max Planck Computing and Data Facility} (\href{mpcdf.mpg.de}{MPCDF})\\
+        Garching bei M{\"u}nchen, Germany\\ % Your institution for the title page
+        \medskip
+        \href{giuseppe.di-bernardo@mpcdf.mpg.de}{\textit{giuseppe.di-bernardo@mpcdf.mpg.de}}\\ % Your email address
+        \raisebox{-.25\height}{\includegraphics[width=.5cm]{pics/twitter-icon-circle-blue-logo-preview.png}}\href{https://twitter.com/jose_dibernardo}{\textit{@jose\_dibernardo}} % Your twitter account
 }
 \date{\today} % Date, can be changed to a custom date
 
@@ -148,6 +161,47 @@
 \end{frame}
 
 %--------------------------------------------------------------------
+\begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[at=(current page.center)] {
+            \includegraphics[width=\paperwidth, height=\paperheight]{pics/MPG}
+        };
+    \end{tikzpicture}
+    \only<1->{  \begin{textblock}{5}(0.4,1.75)
+                %\begin{varblock}{...\textit{an indipendent research organization}}
+                  \begin{itemize}
+                    \item \small \textcolor{white}{Basic Research at cutting-edge;}
+                    \item \small \textcolor{white}{strictly curiosity-driven and quality oriented;}
+                    \item \small \textcolor{white}{Flexible, dynamic, interdisciplinary MPIs;}
+                    \item \small \textcolor{white}{Autonomy $\rightarrow$ scientists decide upon science;}
+                    \item \small \textcolor{white}{Long-term trust systems;}
+                    \item \small \textcolor{white}{Quality assurance by peers.}
+                  \end{itemize}
+                %\end{varblock}
+                \end{textblock}
+    }
+   % \begin{varblock}{...\textit{an indipendent research organization}}
+   %  \begin{itemize}
+   %      \item \small Basic Research at cutting-edge;
+   %      \item \small strictly curiosity-driven and quality oriented;
+   %      \item \small Flexible, dynamic, interdisciplinary MPIs;
+   %      \item \small Autonomy $\rightarrow$ scientists decide upon science;
+   %      \item \small Long-term trust systems; 
+   %      \item \small Quality assurance by peers.
+   %  \end{itemize}
+   %  \end{varblock}
+\end{frame}
+
+%--------------------------------------------------------------------
+
+\begin{frame}[plain]
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[at=(current page.center)] {
+            \includegraphics[width=\paperwidth, height=\paperheight]{pics/mpg_places}
+        };
+    \end{tikzpicture}
+\end{frame}    
+
 \begin{frame}
 	\frametitle{Outline} 
 	\tableofcontents[hideallsubsections] 
@@ -171,7 +225,7 @@
 \subsection[APT]{Atom Probe Tomography}
 %--------------------------------------------------------------------
 \begin{frame}
-    \frametitle{Atom Probe Tomography (APT) Microscopy}
+    \frametitle{Atom Probe Tomography (APT): a new playground for Big Data analysis}
         \begin{itemize}
             \item Chemical analysis of 3D Volumes
             \item Atomic scale 
@@ -288,7 +342,7 @@
                 \begin{block}{Our approach: \itshape Direct calculation}
                     \begin{itemize}
                         \item \small $A({\bf s}) = \sum\limits_{j=0}^{N-1} f_{j}(s) \exp(2i\pi {\bf S}\cdot {\bf r_{j})}$  
-                        \item \small \textcolor{red}{$\mathcal{O}(N\cdot N)$}
+                        \item \small \textcolor{red}{$\mathcal{O}(N^{2})$}
                         %\item \small for small unit cells
                     \end{itemize}
                 \end{block}
@@ -359,7 +413,7 @@
                     \begin{itemize}
                         \hfsetfillcolor{green!10}
                         \hfsetbordercolor{green}
-                        \item \tikzmarkin<3>{flops}(0.2,-0.15)(-0.,0.3)$N_{\rm flop} \approx 10 \times N_{\rm atoms} \times N_{\rm hkl}: \mathcal{O}(\num{1e14})$\tikzmarkend{flops}~\textit{flop} \hspace*{5mm}\dNinja%floating point operations 
+                        \item \tikzmarkin<3>{flops}(0.2,-0.15)(-0.,0.25)$N_{\rm flop} \approx 10 \times N_{\rm atoms} \times N_{\rm hkl}: \mathcal{O}(\num{\geq1e15})$\tikzmarkend{flops}~\textit{flop} \hspace*{5mm}\dNinja%floating point operations 
                         %\item $N_{\rm flop} >> N_{\rm memory ~ transfers}$;
                         \item \small modern GPU: $10^{13}$ Flop/s, CPU server: $10^{12}$ Flop/s \hspace*{5mm}\dWinkey
                         \item \small algorithm well suited for GPU computations, scalable across multiple GPUs $\rightarrow \mathcal{O}(minutes)$
@@ -375,164 +429,18 @@
 
 %--------------------------------------------------------------------
 \section{Big Data Analytics at MPCDF}
-% {%<--- Start local changes
-% \setbeamertemplate{navigation symbols}{}
-% \usebackgroundtemplate{\includegraphics[width=\textwidth]{pics/meth}}
-% \begin{frame}[plain]
-% \end{frame}
-% }%<---- Finish local changes
 \begin{frame}[plain]
     \begin{tikzpicture}[remember picture,overlay]
         \node[at=(current page.center)] {
             \includegraphics[width=\paperwidth, height=\paperheight]{pics/meth}
         };
     \end{tikzpicture}
-    \Huge{\centerline{\textcolor{white}{Big Data Analytics at the MPCDF}}}
-
+    %\Huge{\centerline{\textcolor{white}{Big Data Analytics at the MPCDF}}}
+    \Huge{\centerline{\textcolor{white}{Big-Data Driven Materials Science}}}
+    \Huge{\centerline{\textcolor{white}{at the MPCDF}}}
 \end{frame}
 %--------------------------------------------------------------------
-\subsection{PyNX: A Python-based approach to GPU computing} 
-
-%--------------------------------------------------------------------
-\begin{frame}
-\frametitle{PyNX: Tools for {\bf Nano-structures X-tallograhy}}
-    \visible<1->{It is an open-source library created by \textit{Vincent Favre-Nicolin} at ESRF\footnotemark with the following main modules:
-                \begin{enumerate}
-                    \item \visible<2->{\tikzmarkin<2->{pynx.gpu}\texttt{pynx.gpu}\footnotemark: X-ray scattering computing using graphical processing units, allowing up to $4\times 10^{11}$ reflections/atoms/seconds (e.g., 2x nVidia GeForce GTX 980)\tikzmarkend{pynx.gpu};}
-                    \item \visible<3->{\texttt{pynx.ptycho}: simulation and analysis of experiments using the ptychography technique;}
-                    \item \visible<4->{\texttt{pynx.wavefront}: X-ray wavefront propagation in the near, far field, or continuous;}
-                    \item \visible<5->{\texttt{pynx.cdi}: Coherent Diffraction Imaging reconstruction algorithms using GPU.}
-                \end{enumerate} 
-             \footnotetext[1]{European Synchrotron Radiation Facility; \url{favre@esrf.fr}}   
-            \footnotetext[2]{{\bf New}: in PyNX 3.1.0, is called \texttt{pynx.scattering}}
-            }
-\end{frame}
-
-%--------------------------------------------------------------------
-
-\begin{frame}
-\frametitle{PyNX: Hardware requirements}
-PyNX aims to help computing scattering (X-ray or neutrons) maps for atomic structures, especially if they are \textit{distorted or disordered}.
-
-% The library uses GPU computing (although parallel CPU computing is also available as a fall-back), with the following platforms:
-% nVidia's CUDA toolkit and the pyCUDA library
-% OpenCL language, along with pyOpenCL library.
-% Using GPU computing, PyNX provides fast parallel computation of scattering from large assemblies of atoms (>> 108 atoms) and 1D, 2D or 3D coordinates (>>106 grid points)
-% in reciprocal space. Typical computing speeds on GPUs more than 1011 reflections/atoms/s on nVidia cards, more than 2 orders of magnitude faster than on a CPU.
-
-\begin{columns}
-    \begin{column}{.8\textwidth}
-        \begin{itemize}
-            \item High-performance computing with GPUs
-        %\begin{itemize}
-        %    \item GPUs computing
-                \begin{itemize}   
-                    \item \textcolor{blue}{nVidia's CUDA toolkit}\footnotemark and the pyCUDA library
-                    \item \textcolor{red}{OpenCL}\footnotemark language, along with pyOpenCL library     
-                \end{itemize}  
-        \end{itemize}
-                \begin{block}{GPU-accelerated applications}
-        \small \textcolor{blue}{PyNX provides fast parallel computation of \textit{scattering from large assemblies of atoms} ($\gg 10^{8}$ atoms) and \textbf{1D}, \textbf{2D} or \textbf{3D} coordinates ($\gg 10^{6}$ grid points) in \textit{reciprocal latticespace}.}
-        \end{block}
-        \vspace*{-0.31cm}
-    \end{column}
-    \begin{column}{.35\textwidth}
-        \begin{figure}
-            \begin{minipage}{0.65\textwidth}
-                \includegraphics[width=\textwidth]
-                {pics/tesla_card}
-            \end{minipage}
-        \end{figure}   
-    \end{column}
-    \hspace*{-1cm}
-\end{columns}
-\footnotetext[3]{\url{https://developer.nvidia.com/cuda-toolkit}}
-\footnotetext[4]{\url{https://www.khronos.org/opencl/}}
-\end{frame}
-
-%--------------------------------------------------------------------
-
-\begin{frame}[fragile]
-\frametitle{PyNX: Software requirements}
-PyNX supports Python version {\bf 2.7, 3.4} and above (\textcolor{green}{Anaconda distribution} is recommended).\\ 
-\textcolor{blue}{Python interface} $\Rightarrow$ \textcolor{red}{No need to learn CUDA}
-
-\begin{columns}
-    \begin{column}{.7\textwidth}
-              \hspace*{-1.5cm}
-                \begin{block}{PyNX: Prerequisites}
-        \small PyNX is available from:
-\begin{itemize}
-\item<1-> Mandatory: \texttt{numpy, matplotlib, pycuda};
-\item<2-> Recommended\footnotemark: \texttt{pyfftw} for cpu calculations;
-\item<3-> Optionally\footnotemark: \texttt{cctbx} library, for \textit{grazing incidence scattering} \\ 
-\texttt{\$ conda install -c mx cctbx=20160309}
-\end{itemize}
-        \end{block}
-        %\vspace*{-0.31cm}
-    \end{column}
-    \begin{column}{.3\textwidth}
-            \begin{textblock}{5}(2.5,.88)
-                \scriptsize\itshape{\textcolor{blue}{Python is the Common Language}}
-            \end{textblock}
-        %\begin{figure}
-         %   \begin{minipage}{0.65\textwidth}
-                \includegraphics[width=1.3\textwidth]
-                {pics/anaconda_distribution}
-          %  \end{minipage}
-        %\end{figure}   
-    \end{column}
-    \hspace*{.8cm}
-\end{columns}
-\footnotetext[6]{\url{https://pypi.python.org/pypi/pyFFTW}}
-\footnotetext[7]{\url{http://cctbx.sourceforge.net/}}
-\end{frame}
-
-%--------------------------------------------------------------------
-%--------------------------------------------------
-\begin{frame}[fragile]
-\frametitle{PyNX: Software requirements}
-PyNX supports Python version {\bf 2.7, 3.4} and above (\textcolor{green}{Anaconda distribution} is recommended) .\\ 
-\textcolor{blue}{Python interface} $\Rightarrow$ \textcolor{red}{No need to learn CUDA}
-
-\begin{columns}
-    \begin{column}{.7\textwidth}
-%         \begin{itemize}
-%             \item GPUs computing
-%                 \begin{itemize}   
-%                     \item \textcolor{blue}{nVidia's CUDA toolkit}\footnotemark and the pyCUDA library
-%                     \item \textcolor{red}{OpenCL}\footnotemark language, along with pyOpenCL library     
-%                 \end{itemize}  
-%         \end{itemize}
-              \hspace*{-1.cm}
-                \begin{block}{Install PyNX}
-        \small PyNX is available from:
-\begin{itemize}
-\item<1-> \url{http://ftp.esrf.fr/pub/scisoft/PyNX/}
-\item<2-> \url{http://gitlab.esrf.fr/favre/PyNX} 
-\item<3-> \texttt{PyPI}: \begin{verbatim}
-$ pip install pynx
-\end{verbatim}
-
-\end{itemize}
-        \end{block}
-        \vspace*{-0.31cm}
-    \end{column}
-    \begin{column}{.3\textwidth}
-        \begin{textblock}{5}(2.8,1.)
-                \scriptsize\itshape{\textcolor{blue}{Python is also a great\\ glue language!}}
-            \end{textblock}
-        \begin{figure}
-            \begin{minipage}{0.65\textwidth}
-                \includegraphics[width=2.4\textwidth]
-                {pics/cuda-5}
-            \end{minipage}
-        \end{figure}   
-    \end{column}
-    \hspace*{1.cm}
-\end{columns}
-\end{frame}
-
+\subsection{PyCUDA}
 % ========================
 % My Comments: 
 % High-level scripting languages are in many ways polar opposites to GPUs.
@@ -580,7 +488,7 @@ $ pip install pynx
     \hspace*{-2cm}
 \end{columns}
 \footnotetext[8]{\scriptsize CUDA is a general purpose parallel computing architecture
-that leverages the parallel compute engine\\ in NVIDIA graphics processing units (GPUs)}%to solve many complex computational problems in a fraction of the time required on a CPU.}
+that leverages the parallel compute engine in NVIDIA graphics processing units (GPUs)}%to solve many complex computational problems in a fraction of the time required on a CPU.}
 \end{frame}
 % MY COMMENTS
 % CUDA is a general purpose parallel computing architecture that leverages the parallel compute engine in NVIDIA graphics processing units (GPUs) to solve many complex computational problems in a fraction of the time required on a CPU. It includes the CUDA Instruction Set Architecture (ISA) and the parallel compute engine in the GPU. To program to the CUDATM architecture, developers can, today, use C, one of the most widely used high-level programming languages, which can then be run at great performance on a CUDATM enabled processor. Other languages will be supported in the future, including FORTRAN and C++.
@@ -596,7 +504,7 @@ that leverages the parallel compute engine\\ in NVIDIA graphics processing units
         \item simple to learn and use \dSmiley % (interpreted)
         \item extensible and embeddable: Python C API
         \item science oriented too (NumPy, SciPy, mpi4py)
-        \item great visualization tools (Bokeh, Matplotib) %\dCooley 
+        \item great visualization tools (Bokeh, Matplotlib) %\dCooley 
         \item very well documented 
     \end{itemize}
     \end{column}
@@ -604,7 +512,6 @@ that leverages the parallel compute engine\\ in NVIDIA graphics processing units
         \begin{figure}
             \begin{minipage}{1.\textwidth}
                 \includegraphics[width=1.\textwidth]{pics/logo-stack-python}
-                %\caption{}
              \end{minipage}
         \end{figure}
     \end{column}
@@ -621,7 +528,7 @@ that leverages the parallel compute engine\\ in NVIDIA graphics processing units
         \item \small \texttt{FFT's}, tools for integrating \texttt{C/C++} and \texttt{Fortran} code
     \end{itemize}   
 \end{block}
-%==================
+%============================
 % My comments
 % NumPy is the fundamental package for scientific computing with Python. It contains among other things:
 
@@ -631,31 +538,124 @@ that leverages the parallel compute engine\\ in NVIDIA graphics processing units
 %     useful linear algebra, Fourier transform, and random number capabilities
 
 % Besides its obvious scientific uses, NumPy can also be used as an efficient multi-dimensional container of generic data. Arbitrary data-types can be defined. This allows NumPy to seamlessly and speedily integrate with a wide variety of databases.
+%============================
 \end{frame}
-
 
 %--------------------------------------------------------------------
 
 \begin{frame}
-\frametitle{Scripting: Python\footnote{Slide courtesy by A. Kl\"{o}ckner, Nvidia GTC 2010}}
-One example of a scripting language: Python
+%\hfsetfillcolor{blue!10}
+%\hfsetbordercolor{blue}
+%(0.2,-0.5)(-0,0.7)
+    \frametitle{Whetting your appetite: \texttt{SourceModule}}
+        \begin{columns}
+            \begin{column}{\textwidth}
+                \ttfamily\footnotesize
+                {\bf import} \textcolor{red}{pycuda}.driver as \textcolor{red}{cuda}\\
+                {\bf import} \textcolor{red}{pycuda}.autoinit\\
+                {\bf import} \textcolor{red}{numpy} as \textcolor{red}{np}
+                
+                a = \textcolor{red}{np}.random.randn(4,4).astype(\textcolor{red}{np}.float32)\\
+                a\_gpu = \textcolor{red}{cuda}.mem\_alloc(a.nbytes) \\
+                \# \textit{host-to-device}\\
+                \textcolor{red}{cuda}.memcpy\_htod(a\_gpu, a) \\
+                \vspace{2mm}
+                mod = \textcolor{red}{cuda}.SourceModule("""\\
+                    \tikzmarkin<1>{a}\textcolor{blue}{\_\_global\_\_ void multiply\_by\_two(float *a)\\
+                    \texttt{\{}\\
+                    int idx = threadIdx.x + threadIdx.y*4;\\
+                    a[idx] *= 2;\\
+                    \texttt{\}}}
+                    \hfill \textsc{Compute Kernel}\tikzmarkend{a} \\
+                    """)\\
+                    \vspace{2mm}
+                    func = mod.get\_function("\textcolor{blue}{multiply\_by\_two}")\\
+                    func(a\_gpu, bloc=(4,4,1))
+            \end{column}
+%             \begin{column}{0.35\textwidth}
+%                 \footnotesize
+%                 {\bf import} \textcolor{red}{numpy} as \textcolor{red}{np}\\
+%                 {\bf import} \textcolor{red}{pycuda}.autoinit\\
+%                 {\bf import} \textcolor{red}{pycuda}.gpuarray as gpuarray\\
+                
+%             \end{column}
+        \end{columns}
+\end{frame}
+%------------------------------------------------
 
+\begin{frame}
+    \frametitle{Whetting your appetite: \texttt{GPUArrays}}
+        \ttfamily\footnotesize
+        {\bf import} \textcolor{red}{numpy} as \textcolor{red}{np}\\
+        {\bf import} \textcolor{red}{pycuda}.autoinit\\
+        {\bf import} \textcolor{red}{pycuda}.gpuarray as gpuarray \\
+        \vspace{.5mm}
+     
+        a\_gpu = gpuarray.to\_gpu(\textcolor{red}{np}.random.randn(4,4).astype(np.float32))\\
+        a\_doubled = (2*a\_gpu).get() \\ 
+        {\bf print} a\_doubled\\
+        {\bf print} a\_gpu   
+%        \begin{textblock}{2}(2,1)
+%         \textblocklabel{block two}
+% Here is another, slightly narrower, block, at position (2,1) on the page.
+% \end{textblock}
+\begin{block}{\texttt{GPUArrays}: computational linear algebra}
+\begin{itemize}
+\sffamily
+\item \small element-wise algebraic operations (\texttt{+, -, *, /, sin, cos, exp})
+% \item \small 
+\item tight integration with \texttt{numpy}
+\begin{itemize}
+\item \small \texttt{gpuarray.to\_gpu(numpy\_array)}
+\item \small \texttt{numpy\_array = gpuarray.get()}
+\end{itemize}
+\item \small mixed data types (\texttt{int32 + float32 = float64})
+\end{itemize}
+\end{block}
+\end{frame}
+
+%--------------------------------------------------------------------
+\begin{frame}
+\frametitle{PyCUDA Workflow: "Edit-Run-Repeat"}
+A two-fold aim: 
+\begin{enumerate}
+    \item usage of \textit{existing} \texttt{CUDA C}
+    \item \textit{on top} of the first layer, PyCUDA $\Rightarrow$ \textit{abstractions}
+\end{enumerate}
+\begin{figure}
+    \includegraphics[width=0.95\textwidth]{pics/pycuda_workflow}
+        \caption{A. Kl\"{o}ckner et al. 2013, \url{https://arxiv.org/abs/1304.5553}}
+\end{figure}
+\end{frame}
+
+%--------------------------------------------------------------------
+
+\subsection{PyCUDA}
+\begin{frame}
+\frametitle{PyCUDA: Vital Information}
 \begin{columns}
-    \begin{column}{.5\textwidth}
+    \begin{column}{.65\textwidth}
         \begin{itemize}
-            \item Mature
-            \item Large and active community
-            \item Emphasizes readability
-            \item Written in widely-portable C 
-            \item A 'multi-paradigm' language
-            \item Rich ecosystem of sci-comp related software
-        \end{itemize}
+            \item Availability: \href{https://pypi.python.org/pypi/pycuda}{Freely down-loadable from this location}
+                \begin{itemize}
+                    \item Open source
+                    \item MIT Licensed  
+                \end{itemize}  
+            \item requires {\bf NumPy}, Python 2.4+ (Win/OS X/Linux)
+            \item Support via mailing list
+            \item For further information see:
+                \begin{itemize}
+                    \item \href{https://mathema.tician.de/software/pycuda/}{Main PyCUDA page}
+                   \item \href{https://wiki.tiker.net/PyCuda}{PyCUDA Wiki}
+                   \item \href{https://wiki.tiker.net/PyCuda/FrequentlyAskedQuestions}{PyCUDA FAQ}
+                \end{itemize}
+        \end{itemize}        
     \end{column}
-    \begin{column}{.5\textwidth}
+    \begin{column}{.45\textwidth}
         \begin{figure}
             \begin{minipage}{0.65\textwidth}
-                \includegraphics[width=0.85\textwidth]{pics/python_logo}
-                %\caption{courtesy by A. Kl\"{o}ckner, Nvidia GTC 2010}
+                \includegraphics[width=1.1\textwidth]{pics/pycuda_vital}
+                \caption{courtesy by A. Kl\"{o}ckner, Nvidia GTC 2010}
             \end{minipage}
         \end{figure}   
     \end{column}
@@ -663,6 +663,7 @@ One example of a scripting language: Python
 \end{columns}
 \end{frame}
 
+%--------------------------------------------------------------------
 %====================================================================
 % The PyCUDA philosophy
 %{\bf PyCUDA} gives you easy, Pythonic \underline{complete} access to Nvidia's CUDA parallel computation API. \\ Some PyCUDA \textbf{features}:
@@ -749,134 +750,153 @@ One example of a scripting language: Python
 % \end{frame}
 
 %--------------------------------------------------------------------
-
-\begin{frame}
-%\hfsetfillcolor{blue!10}
-%\hfsetbordercolor{blue}
-%(0.2,-0.5)(-0,0.7)
-    \frametitle{Whetting your appetite: \texttt{SourceModule}}
-        \begin{columns}
-            \begin{column}{\textwidth}
-                \ttfamily\footnotesize
-                {\bf import} \textcolor{red}{pycuda}.driver as \textcolor{red}{cuda}\\
-                {\bf import} \textcolor{red}{pycuda}.autoinit\\
-                {\bf import} \textcolor{red}{numpy} as \textcolor{red}{np}
-                
-                a = \textcolor{red}{np}.random.randn(4,4).astype(\textcolor{red}{np}.float32)\\
-                a\_gpu = \textcolor{red}{cuda}.mem\_alloc(a.nbytes) \\
-                \# \textit{host-to-device}\\
-                \textcolor{red}{cuda}.memcpy\_htod(a\_gpu, a) \\
-                \vspace{2mm}
-                mod = \textcolor{red}{cuda}.SourceModule("""\\
-                    \tikzmarkin<1>{a}\textcolor{blue}{\_\_global\_\_ void multiply\_by\_two(float *a)\\
-                    \texttt{\{}\\
-                    int idx = threadIdx.x + threadIdx.y*4;\\
-                    a[idx] *= 2;\\
-                    \texttt{\}}}
-                    \hfill \textsc{Compute Kernel}\tikzmarkend{a} \\
-                    """)\\
-                    \vspace{2mm}
-                    func = mod.get\_function("\textcolor{blue}{multiply\_by\_two}")\\
-                    func(a\_gpu, bloc=(4,4,1))
-            \end{column}
-%             \begin{column}{0.35\textwidth}
-%                 \footnotesize
-%                 {\bf import} \textcolor{red}{numpy} as \textcolor{red}{np}\\
-%                 {\bf import} \textcolor{red}{pycuda}.autoinit\\
-%                 {\bf import} \textcolor{red}{pycuda}.gpuarray as gpuarray\\
-                
-%             \end{column}
-        \end{columns}
-\end{frame}
-%------------------------------------------------
-
-\begin{frame}
-    \frametitle{Whetting your appetite: \texttt{GPUArrays}}
-        \ttfamily\footnotesize
-        {\bf import} \textcolor{red}{numpy} as \textcolor{red}{np}\\
-        {\bf import} \textcolor{red}{pycuda}.autoinit\\
-        {\bf import} \textcolor{red}{pycuda}.gpuarray as gpuarray \\
-        \vspace{.5mm}
-     
-        a\_gpu = gpuarray.to\_gpu(\textcolor{red}{np}.random.randn(4,4).astype(np.float32))\\
-        a\_doubled = (2*a\_gpu).get() \\ 
-        {\bf print} a\_doubled\\
-        {\bf print} a\_gpu   
-%        \begin{textblock}{2}(2,1)
-%         \textblocklabel{block two}
-% Here is another, slightly narrower, block, at position (2,1) on the page.
-% \end{textblock}
-\begin{block}{\texttt{GPUArrays}: computational linear algebra}
-\begin{itemize}
-\sffamily
-\item \small element-wise algebraic operations (\texttt{+, -, *, /, sin, cos, exp})
-% \item \small 
-\item tight integration with \texttt{numpy}
-\begin{itemize}
-\item \small \texttt{gpuarray.to\_gpu(numpy\_array)}
-\item \small \texttt{numpy\_array = gpuarray.get()}
-\end{itemize}
-\item \small mixed data types (\texttt{int32 + float32 = float64})
-\end{itemize}
- 
-
-\end{block}
-\end{frame}
+\subsection{PyNX: A Python-based approach to GPU computing} 
 
 %--------------------------------------------------------------------
 \begin{frame}
-\frametitle{PyCUDA Workflow: "Edit-Run-Repeat"}
-A two-fold aim: 
-\begin{enumerate}
-    \item usage of \textit{existing} \texttt{CUDA C}
-    \item \textit{on top} of the first layer, PyCUDA $\Rightarrow$ \textit{abstractions}
-\end{enumerate}
-\begin{figure}
-    \includegraphics[width=0.95\textwidth]{pics/pycuda_workflow}
-        \caption{A. Kl\"{o}ckner et al. 2013, \url{https://arxiv.org/abs/1304.5553}}
-\end{figure}
+\frametitle{PyNX: Tools for {\bf Nano-structures X-tallograhy}}
+    \visible<1->{It is an open-source library created by \textit{Vincent Favre-Nicolin} at ESRF\footnotemark with the following main modules:
+                \begin{enumerate}
+                    \item \visible<2->{\tikzmarkin<2->{pynx.gpu}\texttt{pynx.gpu}\footnotemark: X-ray scattering computing using graphical processing units, allowing up to $4\times 10^{11}$ reflections/atoms/seconds (e.g., 2x nVidia GeForce GTX 980)\tikzmarkend{pynx.gpu};}
+                    \item \visible<3->{\texttt{pynx.ptycho}: simulation and analysis of experiments using the ptychography technique;}
+                    \item \visible<4->{\texttt{pynx.wavefront}: X-ray wavefront propagation in the near, far field, or continuous;}
+                    \item \visible<5->{\texttt{pynx.cdi}: Coherent Diffraction Imaging reconstruction algorithms using GPU.}
+                \end{enumerate} 
+             \footnotetext[1]{European Synchrotron Radiation Facility; \url{favre@esrf.fr}}   
+            \footnotetext[2]{{\bf New}: in PyNX 3.1.0, is called \texttt{pynx.scattering}}
+            }
 \end{frame}
 
 %--------------------------------------------------------------------
 
-\subsection{PyCUDA}
 \begin{frame}
-\frametitle{PyCUDA: Vital Information}
+\frametitle{PyNX: Hardware requirements}
+PyNX aims to help computing scattering (X-ray or neutrons) maps for atomic structures, especially if they are \textit{distorted or disordered}.
+
+% The library uses GPU computing (although parallel CPU computing is also available as a fall-back), with the following platforms:
+% nVidia's CUDA toolkit and the pyCUDA library
+% OpenCL language, along with pyOpenCL library.
+% Using GPU computing, PyNX provides fast parallel computation of scattering from large assemblies of atoms (>> 108 atoms) and 1D, 2D or 3D coordinates (>>106 grid points)
+% in reciprocal space. Typical computing speeds on GPUs more than 1011 reflections/atoms/s on nVidia cards, more than 2 orders of magnitude faster than on a CPU.
+
 \begin{columns}
-    \begin{column}{.65\textwidth}
+    \begin{column}{.8\textwidth}
         \begin{itemize}
-            \item Availability: \href{https://pypi.python.org/pypi/pycuda}{Freely down-loadable from this location}
-                \begin{itemize}
-                    \item Open source
-                    \item MIT Licensed  
+            \item High-performance computing with GPUs
+        %\begin{itemize}
+        %    \item GPUs computing
+                \begin{itemize}   
+                    \item \textcolor{blue}{nVidia's CUDA toolkit}\footnotemark and the pyCUDA library
+                    \item \textcolor{red}{OpenCL}\footnotemark language, along with pyOpenCL library     
                 \end{itemize}  
-            \item requires {\bf NumPy}, Python 2.4+ (Win/OS X/Linux)
-            \item Support via mailing list
-            \item For further information see:
-                \begin{itemize}
-                    \item \href{https://mathema.tician.de/software/pycuda/}{Main PyCUDA page}
-                   \item \href{https://wiki.tiker.net/PyCuda}{PyCUDA Wiki}
-                   \item \href{https://wiki.tiker.net/PyCuda/FrequentlyAskedQuestions}{PyCUDA FAQ}
-                \end{itemize}
-        \end{itemize}        
+        \end{itemize}
+                \begin{block}{GPU-accelerated applications}
+        \small \textcolor{blue}{PyNX provides fast parallel computation of \textit{scattering from large assemblies of atoms} ($\gg 10^{8}$ atoms) and \textbf{1D}, \textbf{2D} or \textbf{3D} coordinates ($\gg 10^{6}$ grid points) in \textit{reciprocal latticespace}.}
+        \end{block}
+        \vspace*{-0.31cm}
     \end{column}
-    \begin{column}{.45\textwidth}
+    \begin{column}{.35\textwidth}
         \begin{figure}
             \begin{minipage}{0.65\textwidth}
-                \includegraphics[width=1.1\textwidth]{pics/pycuda_vital}
-                \caption{courtesy by A. Kl\"{o}ckner, Nvidia GTC 2010}
+                \includegraphics[width=\textwidth]
+                {pics/tesla_card}
             \end{minipage}
         \end{figure}   
     \end{column}
-    \hspace*{-2cm}
+    \hspace*{-1cm}
+\end{columns}
+\footnotetext[3]{\url{https://developer.nvidia.com/cuda-toolkit}}
+\footnotetext[4]{\url{https://www.khronos.org/opencl/}}
+\end{frame}
+
+%--------------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{PyNX: Software requirements}
+PyNX supports Python version {\bf 2.7, 3.4} and above (\textcolor{green}{Anaconda distribution} is recommended) .\\ 
+\textcolor{blue}{Python interface} $\Rightarrow$ \textcolor{red}{No need to learn CUDA}
+
+\begin{columns}
+    \begin{column}{.7\textwidth}
+%         \begin{itemize}
+%             \item GPUs computing
+%                 \begin{itemize}   
+%                     \item \textcolor{blue}{nVidia's CUDA toolkit}\footnotemark and the pyCUDA library
+%                     \item \textcolor{red}{OpenCL}\footnotemark language, along with pyOpenCL library     
+%                 \end{itemize}  
+%         \end{itemize}
+              \hspace*{-1.cm}
+                \begin{block}{Install PyNX}
+        \small PyNX is available from:
+\begin{itemize}
+\item<1-> \url{http://ftp.esrf.fr/pub/scisoft/PyNX/}
+\item<2-> \url{http://gitlab.esrf.fr/favre/PyNX} 
+\item<3-> \texttt{PyPI}: \begin{verbatim}
+$ pip install pynx
+\end{verbatim}
+
+\end{itemize}
+        \end{block}
+        \vspace*{-0.31cm}
+    \end{column}
+    \begin{column}{.3\textwidth}
+        \begin{textblock}{5}(2.8,1.)
+                \scriptsize\itshape{\textcolor{blue}{Python is also a great\\ glue language!}}
+            \end{textblock}
+        \begin{figure}
+            \begin{minipage}{0.65\textwidth}
+                \includegraphics[width=2.4\textwidth]
+                {pics/cuda-5}
+            \end{minipage}
+        \end{figure}   
+    \end{column}
+    \hspace*{1.cm}
 \end{columns}
 \end{frame}
 
-%------------------------------------------------
+%--------------------------------------------------------------------
+
+\begin{frame}[fragile]
+\frametitle{PyNX: Software requirements}
+PyNX supports Python version {\bf 2.7, 3.4} and above (\textcolor{green}{Anaconda distribution} is recommended).\\ 
+\textcolor{blue}{Python interface} $\Rightarrow$ \textcolor{red}{No need to learn CUDA}
+
+\begin{columns}
+    \begin{column}{.7\textwidth}
+              \hspace*{-1.5cm}
+                \begin{block}{PyNX: Prerequisites}
+        \small PyNX is available from:
+\begin{itemize}
+\item<1-> Mandatory: \texttt{numpy, matplotlib, pycuda};
+\item<2-> Recommended\footnotemark: \texttt{pyfftw} for cpu calculations;
+\item<3-> Optionally\footnotemark: \texttt{cctbx} library, for \textit{grazing incidence scattering} \\ 
+\texttt{\$ conda install -c mx cctbx=20160309}
+\end{itemize}
+        \end{block}
+        %\vspace*{-0.31cm}
+    \end{column}
+    \begin{column}{.3\textwidth}
+            \begin{textblock}{5}(2.5,.88)
+                \scriptsize\itshape{\textcolor{blue}{Python is the Common Language}}
+            \end{textblock}
+        %\begin{figure}
+         %   \begin{minipage}{0.65\textwidth}
+                \includegraphics[width=1.3\textwidth]
+                {pics/anaconda_distribution}
+          %  \end{minipage}
+        %\end{figure}   
+    \end{column}
+    \hspace*{.8cm}
+\end{columns}
+\footnotetext[6]{\url{https://pypi.python.org/pypi/pyFFTW}}
+\footnotetext[7]{\url{http://cctbx.sourceforge.net/}}
+\end{frame}
+
+%--------------------------------------------------------------------
 
 
 
-%---------------------------------------------------
+%--------------------------------------------------------------------
 \begin{frame}[fragile]
 \frametitle{PyNX \textbf{kernel}: \texttt{\_\_global\_\_ void CUDA\_fhkl()}}
 \lstset{language=C++, basicstyle=\ttfamily\scriptsize,commentstyle=\itshape\color{colComments}}
@@ -948,7 +968,6 @@ def do_work(*args, **kwargs):
       """Loads an APT.pos file 
          Columns: x, y, z, Da
       """
-      print("reading in the data")
       f = open(file_name, mode='rb') # Load orthonormal coord.
       dt_type = np.dtype({'names':['x', 'y', 'z', 'Da'],
                           'formats':['>f4', '>f4', '>f4', '>f4']})
@@ -958,7 +977,10 @@ def do_work(*args, **kwargs):
       return pos
 \end{lstlisting}
 \end{frame}
-
+% \begin{figure}
+% \includegraphics[width=0.5\textwidth]{pics/}
+% \end{figure}
+% print("reading in the data")
 %-------------------------------------------------
 
 \begin{frame}[containsverbatim]
@@ -993,7 +1015,7 @@ def do_work(*args, **kwargs):
     gpu_name = args[0]  # identify GPU, e.g. GeForce GTX980  
     
     if args[0] is not None:
-        fhkl, dt = gpu.Fhkl_thread(h, k, l, xEl, yEl, zEl,   gpu_name=args[0],verbose=True,language="CUDA",cl_platform="nvidia")
+        fhkl, dt = gpu.Fhkl_thread(h, k, l, xEl, yEl, zEl,   gpu_name=gpu_name,verbose=True,language="CUDA",cl_platform="nvidia")
         print("The FT computed in dt = {0:7.5f}:".format(dt))
         print("{0:d} fourier number points".format(fhkl.size))
         
@@ -1008,7 +1030,7 @@ def do_work(*args, **kwargs):
 \end{block}
 \end{frame}
 
-%-------------------------------------------------
+%--------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{PyNX: Performance }
@@ -1026,42 +1048,50 @@ def do_work(*args, **kwargs):
     \end{textblock}
     \begin{block}{assesment of \textbf{GPU-accelerated python} software package PyNX}
         \begin{itemize}
-            \item \small Effective (singe precision) throughput per GPU: \\ 
+            \item \small Effective (single precision) throughput per GPU: \\ 
              up to \textbf{$3.5\times 10^{11}$ reflections $\cdot$ atoms $\cdot$ s$^{-1}$}  
             %\item \small What is the peak performance???
         \end{itemize}
     \end{block}
 \end{frame}
 
-%-------------------------------------------------
+%--------------------------------------------------------------------
 
-\begin{frame}
+\begin{frame}[t]
 \frametitle{PyNX: benchmarks at the MPCDF}
-\begin{columns}
-\column{0.5\textwidth}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \centering
-  \includegraphics[width=0.8\linewidth]{pics/PyNX_runtest_DRACOgpu.png}
-\end{minipage}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \centering
-  \includegraphics[width=0.8\linewidth]{pics/PascalGPUvsCPU.png}
+Logarithmic scale on the vertical axis! \bcattention
+\begin{onlyenv}<1-3>
+  \begin{center}
+    \includegraphics<1>[width=0.96\textwidth]{pics/PyNX_runtest_DRACOgpu.png}
+    \includegraphics<2>[width=0.96\textwidth]{pics/PascalGPUvsCPU.png}
+    \includegraphics<3>[width=0.96\textwidth]{pics/PyNX_runtest_PascalvsMaxwell_gpu.png}
+  \end{center}
+\end{onlyenv}
+% \begin{columns}
+% \column{0.5\textwidth}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \centering
+%   \includegraphics[width=0.8\linewidth]{pics/PyNX_runtest_DRACOgpu.png}
+% \end{minipage}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \centering
+%   \includegraphics[width=0.8\linewidth]{pics/PascalGPUvsCPU.png}
 
-\end{minipage}
-\column{0.5\textwidth}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \textbf{PyNX computing time at the MPCDF for $10^{8}$ atoms}
-  \begin{enumerate}
-  \item 2 $\times$ nVidia GTX 980   
-  \item 2 $\times$ nVidia GTX 1080
-  \item interactive plots with Plotly 
-  \end{enumerate}
-\end{minipage}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \centering
-  \includegraphics[width=0.8\linewidth]{pics/PyNX_runtest_PascalvsMaxwell_gpu.png}
-\end{minipage}
-\end{columns}
+% \end{minipage}
+% \column{0.5\textwidth}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \textbf{PyNX computing time at the MPCDF for $10^{8}$ atoms}
+%   \begin{enumerate}
+%   \item 2 $\times$ nVidia GTX 980   
+%   \item 2 $\times$ nVidia GTX 1080
+%   \item interactive plots with Plotly 
+%   \end{enumerate}
+% \end{minipage}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \centering
+%   \includegraphics[width=0.8\linewidth]{pics/PyNX_runtest_PascalvsMaxwell_gpu.png}
+% \end{minipage}
+% \end{columns}
 \end{frame}
 
 \begin{frame}
@@ -1105,11 +1135,15 @@ def do_work(*args, **kwargs):
 
     \begin{column}{0.45\textwidth}
         \includegraphics[width=1.1\textwidth]{pics/Hydra570.png}
-        \begin{textblock}{5}(2.25,.5)
-            \footnotesize\scshape{\textcolor{red}{Supercomputing Drives\\ Science through Simulations}}
+        \begin{textblock}{5}(2.2,.5)
+            \footnotesize\textsc{\textcolor{red}{Supercomputing Drives\\ Science through Simulations.}}
+            %COMMENT: The MPCDF provides facilities for high-performance computing
+            % to all Max-Planck researchers and their collaboration partners.
         \end{textblock}
-        \begin{textblock}{5}(2.5,2.2)
-            \scriptsize\itshape{\textcolor{blue}{The MPG SuperComputer \textit{Hydra}\\ at the MPCDF}}
+        \begin{textblock}{5}(2.2,1.95)
+            \scriptsize\itshape{\textcolor{blue}{The MPG SuperComputer \textit{Hydra}\\ at the MPCDF}\\
+                                                In total there are $~ 83.000$ cores\\ with a main memory of $280$ TB and a peak\\ 
+                                                performance of about $1.7$ PetaFlop/s.}
         \end{textblock}
     \end{column}
 
@@ -1177,7 +1211,7 @@ def do_work(*args, **kwargs):
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{NumPy to VTK}
+\frametitle{Converting your NumPy arrays to VTK files}
 %: Converting your NumPy arrays to VTK arrays and files}
 %\begin{columns}
 %\begin{column}{0.6\textwidth}
@@ -1195,18 +1229,28 @@ gridToVTK("/viz/vtk/" + filename, h, k, l, pointData = {"pow_spec" : pow_spec})
 \begin{enumerate}
 \item \small \texttt{\$ pip install pyevtk}
 \item \small save \textbf{NumPy} arrays straight to different types of \textcolor{red}{VTK XML-based} 
-\item \small visualize and process your \textbf{NumPy} arrays with any of the flagship VTK applications such as \textcolor{blue}{ParaView, VisIt, Mayavi}
+\item \small visualize and process your \textbf{NumPy} arrays with any of the flagship VTK applications such as \textcolor{blue}{Mayavi, ParaView, VisIt\footnotemark, }
 % file formats (not the old legacy ones), without even needing to have VTK installed in your system, making NumPy the only dependency. This way, you can easily save your NumPy arrays into files that can be visualized and processed with any of the flagship VTK applications such as ParaView, VisIt, Mayavi, while obviously you can easily load said files with VTK and use all the goodies the toolkit offers.
 \end{enumerate}
 \end{block}
+\footnotetext[8]{\footnotesize MPCDF has no self-interests in any of the projects\\ nor any conflict of interest}
 \end{frame}
 % # **************************************************************
 % # * Apply the high level gridToVTK function to our 3D dataset. *
 % # * This example shows how to export a rectilinear grid.       *
 % # **************************************************************
-%------------------------------------------------
-\subsection{Getting started with ParaView} % Sections can be created in order to organize your presentation into discrete blocks, all sections and subsections are automatically printed in the table of contents as an overview of the talk
-%------------------------------------------------
+
+\begin{frame}
+ParaView was designed primarily to handle data with spatial representation. Thus the {\bf data types} used in ParaView are meshes 
+\frametitle{ParaView: The dataset types (sampling structures)}
+    \includegraphics[width=.88\textwidth]{pics/vtk_dataformat}
+\end{frame}
+
+%--------------------------------------------------------------------
+\subsection{Getting started with ParaView} 
+% Sections can be created in order to organize your presentation into discrete blocks, 
+%all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%--------------------------------------------------------------------
 
 %\subsection{Introduction} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
 
@@ -1228,7 +1272,7 @@ gridToVTK("/viz/vtk/" + filename, h, k, l, pointData = {"pow_spec" : pow_spec})
         \end{itemize}
 \end{frame}
 
-%------------------------------------------------
+%--------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{ParaView: a standard de-facto}
@@ -1246,7 +1290,7 @@ gridToVTK("/viz/vtk/" + filename, h, k, l, pointData = {"pow_spec" : pow_spec})
      \vspace*{1cm}
 \end{frame}
 
-%------------------------------------------------
+%--------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{ParaView: The architecture}
@@ -1254,7 +1298,7 @@ The application most people associate with ParaView is really just a small clien
     \includegraphics[width=1.\textwidth]{pics/paraview_arch}   
 \end{frame}
 
-%------------------------------------------------
+%--------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{ParaView: The big picture}
@@ -1268,7 +1312,7 @@ The application most people associate with ParaView is really just a small clien
     \end{block}
 \end{frame}
 
-%------------------------------------------------
+%--------------------------------------------------------------------
 %\subsection{Graphical User Interface}
 
 \begin{frame}
@@ -1324,7 +1368,7 @@ The application most people associate with ParaView is really just a small clien
 \end{tikzpicture}
 \end{frame}
 %\includegraphics[width=.88\textwidth]{pics/GUI_elements}
-%------------------------------------------------
+%--------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{GUI elements definition}
@@ -1337,7 +1381,7 @@ The application most people associate with ParaView is really just a small clien
     \end{enumerate}
 \end{frame}
 
-%------------------------------------------------
+%--------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{Filters Menu}
@@ -1360,7 +1404,7 @@ The application most people associate with ParaView is really just a small clien
     \end{columns}
 \end{frame}
 
-%------------------------------------------------
+%--------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{Other Filters}
@@ -1388,7 +1432,7 @@ The application most people associate with ParaView is really just a small clien
 \end{columns}
 \end{frame}
 
-%------------------------------------------------
+%--------------------------------------------------------------------
 
 \begin{frame}
 \frametitle{ParaView: Multiple views}
@@ -1425,11 +1469,7 @@ The application most people associate with ParaView is really just a small clien
 %------------------------------------------------
 %\subsection{Data Types}
 %------------------------------------------------
-\begin{frame}
-ParaView was designed primarily to handle data with spatial representation. Thus the {\bf data types} used in ParaView are meshes 
-\frametitle{ParaView: The dataset types (sampling structures)}
-    \includegraphics[width=.88\textwidth]{pics/vtk_dataformat}
-\end{frame}
+
 
 \begin{frame}
 \frametitle{Data Selection}
@@ -1592,6 +1632,38 @@ The goal of visualization is often to find the importance details within a large
 \end{columns}
 
 \end{frame}
+
+
+%%%%% BACKUP SLIDES 
+%--------------------------------------------------------------------
+%%%% UNUSEFUL %%%%
+% \begin{frame}
+% \frametitle{Scripting: Python\footnote{Slide courtesy by A. Kl\"{o}ckner, Nvidia GTC 2010}}
+% One example of a scripting language: Python
+
+% \begin{columns}
+%     \begin{column}{.5\textwidth}
+%         \begin{itemize}
+%             \item Mature
+%             \item Large and active community
+%             \item Emphasizes readability
+%             \item Written in widely-portable C 
+%             \item A 'multi-paradigm' language
+%             \item Rich ecosystem of sci-comp related software
+%         \end{itemize}
+%     \end{column}
+%     \begin{column}{.5\textwidth}
+%         \begin{figure}
+%             \begin{minipage}{0.65\textwidth}
+%                 \includegraphics[width=0.85\textwidth]{pics/python_logo}
+%                 %\caption{courtesy by A. Kl\"{o}ckner, Nvidia GTC 2010}
+%             \end{minipage}
+%         \end{figure}   
+%     \end{column}
+%     \hspace*{-2cm}
+% \end{columns}
+% \end{frame}
+
 
 % \begin{frame}
 % \frametitle{Table}
