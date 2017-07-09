@@ -224,26 +224,64 @@
 %--------------------------------------------------------------------
 \subsection[APT]{Atom Probe Tomography}
 %--------------------------------------------------------------------
-\begin{frame}
-    \frametitle{Atom Probe Tomography (APT): a new playground for Big Data analysis}
-        \begin{itemize}
-            \item Chemical analysis of 3D Volumes
-            \item Atomic scale 
-            \item No need of composition calibrations 
-            \item Composition of interfaces and defects (dislocations, clusters ...)
-            \item Can be directly compared to 3D simulations at the atomic scale
-        \end{itemize}
+% \begin{frame}
+%     \frametitle{Atom Probe Tomography (APT)}
+%     %: a new playground for Big Data analysis}
+%         \begin{itemize}
+%             \item Chemical analysis of 3D Volumes
+%             \item Atomic scale 
+%             \item No need of composition calibrations 
+%             \item Composition of interfaces and defects (dislocations, clusters ...)
+%             \item Can be directly compared to 3D simulations at the atomic scale
+%         \end{itemize}
 
-        \begin{figure}
-            \begin{columns}
-                \column{.6\linewidth}
-                %\includegraphics[width=0.89\textwidth]{apt_sketch}
-                \column{.3\linewidth}
-                \caption{Ga grain boundary segregation in a nanocrystalline Al thin-film}
-                \label{fig:example right}
-            \end{columns}
-        \end{figure}
+%         \begin{figure}
+%             \begin{columns}
+%                 \column{.6\linewidth}
+%                 %\includegraphics[width=0.89\textwidth]{apt_sketch}
+%                 \column{.3\linewidth}
+%                 \caption{Ga grain boundary segregation in a nanocrystalline Al thin-film}
+%                 \label{fig:example right}
+%             \end{columns}
+%         \end{figure}
+% \end{frame}
+
+\begin{frame}
+    \frametitle{Atom Probe Tomography (APT)}
+    %: a new playground for Big Data analysis}
+    \begin{columns}
+        \begin{column}{0.7\textwidth}
+                    \includegraphics[width=.5\textwidth]{pics/motivation_1}
+                    \begin{itemize}
+                        \item \small Retrieve high-quality/crystalline data%Finding such sub volumes is imperative for the mentioned tasks;
+                        \item \small Iterativily use the Fourier analysis for reconstruction of APT data; %Fourier analysis can be also used to iteratively arrive at correct reconstruction parameters for APT data;
+                        \item \small Need of the state-of-the art data mining and visualization%Other aspects of the proposed projects need the state of the art data mining methods on these big datasets and also methods to visualize such analysis
+                    \end{itemize}
+        \end{column}
+        \begin{column}{0.3\textwidth}
+                    \includegraphics[height=.6\textheight, width=1.3\textwidth]{pics/motivation}
+        \end{column}
+        \hspace*{2cm}
+    \end{columns}        
+     \begin{textblock}{5}(1.,.2)
+     \textsc{\textcolor{red}{A new playground for Big Data analysis}\footnotemark}
+     \end{textblock}
+          \begin{textblock}{5}(1.7,2.3)
+          \tikzmarkin<1>{markus}\footnotesize Fourier Transforms on billion points data!!\tikzmarkend{markus}
+     \end{textblock}  
+
+%         % \begin{figure}
+%         %     \begin{columns}
+%         %         \column{.6\linewidth}
+%         %         %\includegraphics[width=0.89\textwidth]{apt_sketch}
+%         %         \column{.3\linewidth}
+%         %         \caption{Ga grain boundary segregation in a nanocrystalline Al thin-film}
+%         %         \label{fig:example right}
+%         %     \end{columns}
+%         % \end{figure}
+\footnotetext[1]{\footnotesize by courtesy of B. Gault \& S. Katnagallu (MPIE), and M. Rampp (MPCDF)}
 \end{frame}
+
 
 \AtBeginSection[]
 	{
@@ -487,7 +525,7 @@
     \end{column}
     \hspace*{-2cm}
 \end{columns}
-\footnotetext[8]{\scriptsize CUDA is a general purpose parallel computing architecture
+\footnotetext[2]{\scriptsize CUDA is a general purpose parallel computing architecture
 that leverages the parallel compute engine in NVIDIA graphics processing units (GPUs)}%to solve many complex computational problems in a fraction of the time required on a CPU.}
 \end{frame}
 % MY COMMENTS
@@ -630,7 +668,6 @@ A two-fold aim:
 
 %--------------------------------------------------------------------
 
-\subsection{PyCUDA}
 \begin{frame}
 \frametitle{PyCUDA: Vital Information}
 \begin{columns}
@@ -762,8 +799,8 @@ A two-fold aim:
                     \item \visible<4->{\texttt{pynx.wavefront}: X-ray wavefront propagation in the near, far field, or continuous;}
                     \item \visible<5->{\texttt{pynx.cdi}: Coherent Diffraction Imaging reconstruction algorithms using GPU.}
                 \end{enumerate} 
-             \footnotetext[1]{European Synchrotron Radiation Facility; \url{favre@esrf.fr}}   
-            \footnotetext[2]{{\bf New}: in PyNX 3.1.0, is called \texttt{pynx.scattering}}
+             \footnotetext[3]{European Synchrotron Radiation Facility; \url{favre@esrf.fr}}   
+            \footnotetext[4]{{\bf New}: in PyNX 3.1.0, is called \texttt{pynx.scattering}}
             }
 \end{frame}
 
@@ -805,8 +842,8 @@ PyNX aims to help computing scattering (X-ray or neutrons) maps for atomic struc
     \end{column}
     \hspace*{-1cm}
 \end{columns}
-\footnotetext[3]{\url{https://developer.nvidia.com/cuda-toolkit}}
-\footnotetext[4]{\url{https://www.khronos.org/opencl/}}
+\footnotetext[5]{\url{https://developer.nvidia.com/cuda-toolkit}}
+\footnotetext[6]{\url{https://www.khronos.org/opencl/}}
 \end{frame}
 
 %--------------------------------------------------------------------
@@ -888,8 +925,8 @@ PyNX supports Python version {\bf 2.7, 3.4} and above (\textcolor{green}{Anacond
     \end{column}
     \hspace*{.8cm}
 \end{columns}
-\footnotetext[6]{\url{https://pypi.python.org/pypi/pyFFTW}}
-\footnotetext[7]{\url{http://cctbx.sourceforge.net/}}
+\footnotetext[7]{\url{https://pypi.python.org/pypi/pyFFTW}}
+\footnotetext[8]{\url{http://cctbx.sourceforge.net/}}
 \end{frame}
 
 %--------------------------------------------------------------------
@@ -1033,6 +1070,31 @@ def do_work(*args, **kwargs):
 %--------------------------------------------------------------------
 
 \begin{frame}
+\frametitle{PyNX: Examples}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \includegraphics[width=1.2\textwidth]{pics/2D_scatt-Fig3.png}
+        \end{column}
+        \hspace*{5mm}
+        \begin{column}{0.5\textwidth}
+            \includegraphics[width=1.2\textwidth]{pics/DWBA-Fig4.png}
+        \end{column}
+    \end{columns}
+    % \begin{textblock}{5}(2.5,1.5)
+    %    \scriptsize\itshape{cf. Favre-Nicolin et al.,\\ J. Appl. Cryst. 44 (2011) 635}
+    % \end{textblock}
+    \begin{block}{PyNX to compute e.g., ...}
+        \begin{enumerate}
+            \item \small 2D scattering monoatomic cubic structure $100\times100\times100$
+            \item \small complex refraction index of a crystilline material (\textit{grazing incidence})  
+            %\item \small What is the peak performance???
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+%--------------------------------------------------------------------
+
+\begin{frame}
 \frametitle{PyNX: Performance }
     \begin{columns}
         \begin{column}{0.5\textwidth}
@@ -1140,9 +1202,9 @@ Logarithmic scale on the vertical axis! \bcattention
             %COMMENT: The MPCDF provides facilities for high-performance computing
             % to all Max-Planck researchers and their collaboration partners.
         \end{textblock}
-        \begin{textblock}{5}(2.2,1.95)
+        \begin{textblock}{5}(2.2,1.97)
             \scriptsize\itshape{\textcolor{blue}{The MPG SuperComputer \textit{Hydra}\\ at the MPCDF}\\
-                                                In total there are $~ 83.000$ cores\\ with a main memory of $280$ TB and a peak\\ 
+                                                In total there are $\sim 83.000$ cores\\ with a main memory of $280$ TB and \\a peak
                                                 performance of about $1.7$ PetaFlop/s.}
         \end{textblock}
     \end{column}
@@ -1213,9 +1275,11 @@ Logarithmic scale on the vertical axis! \bcattention
 \begin{frame}[fragile]
 \frametitle{Converting your NumPy arrays to VTK files}
 %: Converting your NumPy arrays to VTK arrays and files}
-%\begin{columns}
-%\begin{column}{0.6\textwidth}
-
+\begin{itemize}
+    \item \footnotesize\textit{The Visualization Toolkit} (VTK) is an open-source software for 3D computer graphics, image processing, volume rendering%, scientific visualization; %modeling
+    \item \footnotesize At its core, VTK is implemented as a \texttt{C++} toolkit;
+    \item \footnotesize supports automated wrapping of the \texttt{C++} core into \texttt{Python}, \texttt{Java}, and \texttt{Tcl}
+\end{itemize}
 \begin{lstlisting}
 from pyevtk.hl import gridToVTK
 h=k=l = np.linspace(-1.1, 1.1, num=N, endpoint=True, dtype='float64')
@@ -1229,11 +1293,10 @@ gridToVTK("/viz/vtk/" + filename, h, k, l, pointData = {"pow_spec" : pow_spec})
 \begin{enumerate}
 \item \small \texttt{\$ pip install pyevtk}
 \item \small save \textbf{NumPy} arrays straight to different types of \textcolor{red}{VTK XML-based} 
-\item \small visualize and process your \textbf{NumPy} arrays with any of the flagship VTK applications such as \textcolor{blue}{Mayavi, ParaView, VisIt\footnotemark, }
+\item \small visualize and process your \textbf{NumPy} arrays with any of the flagship VTK applications such as \textcolor{blue}{ParaView, VisIt, Mayavi}, main workhorses for 3D analysis  
 % file formats (not the old legacy ones), without even needing to have VTK installed in your system, making NumPy the only dependency. This way, you can easily save your NumPy arrays into files that can be visualized and processed with any of the flagship VTK applications such as ParaView, VisIt, Mayavi, while obviously you can easily load said files with VTK and use all the goodies the toolkit offers.
 \end{enumerate}
 \end{block}
-\footnotetext[8]{\footnotesize MPCDF has no self-interests in any of the projects\\ nor any conflict of interest}
 \end{frame}
 % # **************************************************************
 % # * Apply the high level gridToVTK function to our 3D dataset. *
@@ -1241,9 +1304,10 @@ gridToVTK("/viz/vtk/" + filename, h, k, l, pointData = {"pow_spec" : pow_spec})
 % # **************************************************************
 
 \begin{frame}
-ParaView was designed primarily to handle data with spatial representation. Thus the {\bf data types} used in ParaView are meshes 
+ParaView was designed primarily to handle data with spatial representation. Thus the {\bf data types} used in ParaView are meshes\footnotemark 
 \frametitle{ParaView: The dataset types (sampling structures)}
     \includegraphics[width=.88\textwidth]{pics/vtk_dataformat}
+\footnotetext[9]{\footnotesize MPCDF has no self-interests nor any conflict of interest}
 \end{frame}
 
 %--------------------------------------------------------------------
@@ -1299,18 +1363,18 @@ The application most people associate with ParaView is really just a small clien
 \end{frame}
 
 %--------------------------------------------------------------------
-
-\begin{frame}
-\frametitle{ParaView: The big picture}
-The application most people associate with ParaView is really just a small client application built on top of a {\bf tall stack} of libraries that provide ParaView with its functionality.
-      \begin{block}{Full Stack}
-        \begin{itemize}
-            \item \small ParaView comes with a \textbf{\texttt{pvpython}} application that allows you to automate the visualization and post-processing with \textbf{\texttt{Python}} scripting;
-            \item \small ParaView Server library \textbf{\texttt{pvserver}} provides the abstraction layer necessary for running parallel, interactive visualization. It relieves the client application from most of the issues concerning if and how ParaView is running in parallel;
-            \item \small The \textbf{Visualization Toolikit} (VTK) provides the basic visualization and rendering algorithms $\Rightarrow$~ \textbf{Data-Flow Paradigm}
-        \end{itemize}
-    \end{block}
-\end{frame}
+%%% MY COMMENTS: THINGS TO TELL ABOUT %%%
+% \begin{frame}
+% \frametitle{ParaView: The big picture}
+% The application most people associate with ParaView is really just a small client application built on top of a {\bf tall stack} of libraries that provide ParaView with its functionality.
+%       \begin{block}{Full Stack}
+%         \begin{itemize}
+%             \item \small ParaView comes with a \textbf{\texttt{pvpython}} application that allows you to automate the visualization and post-processing with \textbf{\texttt{Python}} scripting;
+%             \item \small ParaView Server library \textbf{\texttt{pvserver}} provides the abstraction layer necessary for running parallel, interactive visualization. It relieves the client application from most of the issues concerning if and how ParaView is running in parallel;
+%             \item \small The \textbf{Visualization Toolikit} (VTK) provides the basic visualization and rendering algorithms $\Rightarrow$~ \textbf{Data-Flow Paradigm}
+%         \end{itemize}
+%     \end{block}
+% \end{frame}
 
 %--------------------------------------------------------------------
 %\subsection{Graphical User Interface}
@@ -1336,12 +1400,12 @@ The application most people associate with ParaView is really just a small clien
     	 \includegraphics[width=1.08\textwidth]{pics/GUI_elements_2}
     	 %\caption{User Interface}
   		};
-        \path (.3,2.7+0.5) coordinate (Menu);
-        \path (.3,2.1+0.5) coordinate (Toolbars);
-        \path (.3,1.5+0.5) coordinate (Pipeline);
-        \path (1.4,.5) coordinate (Inspector);
-        \path (2.2,.05) coordinate (Help);
-        \path (3.5,-1.8+0.5) coordinate (Views);
+        \path (.3,2.2+0.5) coordinate (Menu);
+        \path (.3,1.6+0.5) coordinate (Toolbars);
+        \path (.3,1.+0.6) coordinate (Pipeline);
+        \path (1.4,.09) coordinate (Inspector);
+        \path (2.2,.05-0.5) coordinate (Help);
+        \path (3.5,-1.8+0.5-0.6) coordinate (Views);
    \end{tikzpicture}
  \end{column}
 \end{columns}
@@ -1366,23 +1430,90 @@ The application most people associate with ParaView is really just a small clien
         \path<7>[->,>=latex',red, shorten >=4pt, opacity=.6] (Gviews) edge [out=0, in=200] (Views);
 
 \end{tikzpicture}
+%\BasicTree[3]{orange!95!black}{orange!80!black}{orange!70!black}{leaf}
 \end{frame}
 %\includegraphics[width=.88\textwidth]{pics/GUI_elements}
 %--------------------------------------------------------------------
-
-\begin{frame}
-\frametitle{GUI elements definition}
-    \begin{enumerate}
-        \item {\bf Menu Bar}: allows you to access the majority of features; 
-        \item {\bf Toolbars}: provide quick access to the most commonly used features within ParaView; 
-        \item {\bf Pipeline Browser}: ParaView manages the reading and iterating of  data with a pipeline. A convenient list of pipeline objects with an indentation style that shows the pipeline structure; 
-        \item {\bf Properties Panel}: to view and change the parameters of the current pipeline object. The properties are by default coupled with an information tab that shows a basic summary of the data produced by the pipeline object; 
-        \item {\bf 3D View}: to present the data so that you may view,\\ interact with, and explore your data.
-    \end{enumerate}
-\end{frame}
+%%% MY COMMENTS: THIS IS THE STUFF I HAVE TO TELL, SIMPY %%%
+% \begin{frame}
+% \frametitle{GUI elements definition}
+%     \begin{enumerate}
+%         \item {\bf Menu Bar}: allows you to access the majority of features; 
+%         \item {\bf Toolbars}: provide quick access to the most commonly used features within ParaView; 
+%         \item {\bf Pipeline Browser}: ParaView manages the reading and iterating of  data with a pipeline. A convenient list of pipeline objects with an indentation style that shows the pipeline structure; 
+%         \item {\bf Properties Panel}: to view and change the parameters of the current pipeline object. The properties are by default coupled with an information tab that shows a basic summary of the data produced by the pipeline object; 
+%         \item {\bf 3D View}: to present the data so that you may view,\\ interact with, and explore your data.
+%     \end{enumerate}
+% \end{frame}
 
 %--------------------------------------------------------------------
+\begin{frame}
+\frametitle{Python in Paraview ... believe or not}
+\includegraphics[width=1.\textwidth]{pics/python_in_paraview}
+\end{frame}
 
+\begin{frame}[fragile]
+\frametitle{\texttt{myparaview.py}: change parameters}
+\begin{lstlisting}
+#### import the simple module from the paraview
+from paraview.simple import *
+#### disable automatic camera reset on 'Show'
+paraview.simple._DisableFirstRenderCameraReset()
+
+# create a new 'XML Rectilinear Grid Reader'
+fccBigData_isosurf128vtr = XMLRectilinearGridReader(FileName=['/Users/giuseppe/Projects/MPI-E_dev/viz/vtk/fccBigData_isosurf128.vtr'])
+fccBigData_isosurf128vtr.PointArrayStatus = ['iso_surf']
+# get active view
+renderView1 = GetActiveViewOrCreate('RenderView')
+# uncomment following to set a specific view size
+# renderView1.ViewSize = [951, 573]
+# show data in view
+fccBigData_isosurf128vtrDisplay = Show(fccBigData_isosurf128vtr, renderView1)
+# trace defaults for the display properties.
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\texttt{myparaview.py}: use filters}
+\begin{lstlisting}[firstnumber=18]
+fccBigData_isosurf128vtrDisplay.Representation = 'Outline'
+fccBigData_isosurf128vtrDisplay.ColorArrayName = [None, '']
+fccBigData_isosurf128vtrDisplay.OSPRayScaleArray = 'iso_surf'
+fccBigData_isosurf128vtrDisplay.OSPRayScaleFunction = 'PiecewiseFunction'
+fccBigData_isosurf128vtrDisplay.SelectOrientationVectors = 'None'
+fccBigData_isosurf128vtrDisplay.ScaleFactor = 0.22000000000000003
+fccBigData_isosurf128vtrDisplay.SelectScaleArray = 'None'
+fccBigData_isosurf128vtrDisplay.GlyphType = 'Arrow'
+fccBigData_isosurf128vtrDisplay.PolarAxes = 'PolarAxesRepresentation'
+fccBigData_isosurf128vtrDisplay.GaussianRadius = 0.11000000000000001
+fccBigData_isosurf128vtrDisplay.SetScaleArray = ['POINTS', 'iso_surf']
+\end{lstlisting}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{\texttt{myparaview.py}: create a visualization}
+\begin{lstlisting}[firstnumber=31]
+fccBigData_isosurf128vtrDisplay.ScaleTransferFunction = 'PiecewiseFunction'
+# hide data in view
+Hide(fccBigData_isosurf128vtr, renderView1)
+
+#### saving camera placements for all active views
+
+# current camera placement for renderView1
+renderView1.CameraPosition = [4.572332349968719, -5.768623046054573, -0.07839074501841727]
+renderView1.CameraViewUp = [0.3363494710978258, 0.2542755863640535, 0.9067595929856104]
+renderView1.CameraParallelScale = 1.9052559296210743
+
+#### uncomment the following to render all views
+# RenderAllViews()
+# alternatively, if you want to write images, you can use SaveScreenshot(...).
+\end{lstlisting}
+\end{frame}
+%--------------------------------------------------------------------
+
+%--------------------------------------------------------------------
+%%%  MY COMMENTS: VERY, VERY QUICKLY %%%
 \begin{frame}
 \frametitle{Filters Menu}
     \begin{columns}[c] % The "c" option specifies centered  vertical alignment while the "t" option is used for top vertical alignment
@@ -1405,62 +1536,72 @@ The application most people associate with ParaView is really just a small clien
 \end{frame}
 
 %--------------------------------------------------------------------
+%%%% NOT USEFUL %%%%
+% \begin{frame}
+% \frametitle{Other Filters}
+% \begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
 
-\begin{frame}
-\frametitle{Other Filters}
-\begin{columns}[c] % The "c" option specifies centered vertical alignment while the "t" option is used for top vertical alignment
+% \column{.5\textwidth} % Left column and width
+% \textit{...some of them}
+% \begin{itemize}
+% \item Recent
+% \item AMR (adaptive mesh refinement)
+% \item CTH 
+% \item Common (the same list available in the filters toolbars)
+% \item Cosmology
+% \end{itemize}
 
-\column{.5\textwidth} % Left column and width
-\textit{...some of them}
-\begin{itemize}
-\item Recent
-\item AMR (adaptive mesh refinement)
-\item CTH 
-\item Common (the same list available in the filters toolbars)
-\item Cosmology
-\end{itemize}
-
-\column{.5\textwidth} % Right column and width
-\begin{itemize}
-\item {\bf Data Analysis}: quantitative values from the data
-\item Material Analysis
-\item {\bf Statistics}: descriptive statistics of the data (primarily in tabular form)
-\item Temporal
-\item Alphabetical
-% \item Extract Group 
-\end{itemize}
-\end{columns}
-\end{frame}
+% \column{.5\textwidth} % Right column and width
+% \begin{itemize}
+% \item {\bf Data Analysis}: quantitative values from the data
+% \item Material Analysis
+% \item {\bf Statistics}: descriptive statistics of the data (primarily in tabular form)
+% \item Temporal
+% \item Alphabetical
+% % \item Extract Group 
+% \end{itemize}
+% \end{columns}
+% \end{frame}
 
 %--------------------------------------------------------------------
-
-\begin{frame}
-\frametitle{ParaView: Multiple views}
-\begin{columns}
-\column{0.5\textwidth}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \centering
-  \includegraphics[width=0.8\linewidth]{pics/3d_plus_3d}
-\end{minipage}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \centering
-  \includegraphics[width=0.8\linewidth]{pics/Multiple_views}
-\end{minipage}
-\column{0.5\textwidth}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \textbf{Some examples}
-  \begin{enumerate}
-  \item 3d + 3d
-  \item 3d + Histograms
-  \item 3d + table
-  \end{enumerate}
-\end{minipage}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \centering
-  \includegraphics[width=0.8\linewidth]{pics/3d_plus_table}
-\end{minipage}
-\end{columns}
+\begin{frame}[t]
+\frametitle{Paraview: Multiple views}
+\begin{center}\dCooley[-2][cyan]\end{center}
+\begin{onlyenv}<1-2>
+  \begin{center}
+    \includegraphics<1>[width=0.96\textwidth]{pics/3d_plus_3d}
+    \includegraphics<2>[width=0.96\textwidth]{pics/3d_plus_table}
+    %\includegraphics<3>[width=0.96\textwidth]{pics/PyNX_runtest_PascalvsMaxwell_gpu.png}
+  \end{center}
+\end{onlyenv}
 \end{frame}
+% \begin{frame}
+% \frametitle{ParaView: Multiple views}
+% \begin{columns}
+% \column{0.5\textwidth}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \centering
+%   \includegraphics[width=0.8\linewidth]{pics/3d_plus_3d}
+% \end{minipage}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \centering
+%   \includegraphics[width=0.8\linewidth]{pics/Multiple_views}
+% \end{minipage}
+% \column{0.5\textwidth}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \textbf{Some examples}
+%   \begin{enumerate}
+%   \item 3d + 3d
+%   \item 3d + Histograms
+%   \item 3d + table
+%   \end{enumerate}
+% \end{minipage}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \centering
+%   \includegraphics[width=0.8\linewidth]{pics/3d_plus_table}
+% \end{minipage}
+% \end{columns}
+% \end{frame}
 
 %------------------------------------------------
 %\section{Data Analytics}
@@ -1471,70 +1612,81 @@ The application most people associate with ParaView is really just a small clien
 %------------------------------------------------
 
 
-\begin{frame}
-\frametitle{Data Selection}
-The goal of visualization is often to find the importance details within a large body of information. ParaView's selection abstraction is an important simplification of this process. \par Selection is the act of identifying a subset of some dataset. More specifically the subset identifies particular select points, cells, or blocks within any single data set. \par In ParaView, selection can take place at any time, and the program maintains a current selected set that is linked between all views. 
-\begin{enumerate}
-\item The most direct means to create a selection is via the \texttt{Find Data} dialog \includegraphics[width=0.04\linewidth]{pics/Paraview_filter}
-\item Another way of creating a selection is to pick elements right inside the 3D view: {\bf rubber-band selection}
-\end{enumerate}
-\end{frame}
+% \begin{frame}
+% \frametitle{Data Selection}
+% The goal of visualization is often to find the importance details within a large body of information. ParaView's selection abstraction is an important simplification of this process. \par Selection is the act of identifying a subset of some dataset. More specifically the subset identifies particular select points, cells, or blocks within any single data set. \par In ParaView, selection can take place at any time, and the program maintains a current selected set that is linked between all views. 
+% \begin{enumerate}
+% \item The most direct means to create a selection is via the \texttt{Find Data} dialog \includegraphics[width=0.04\linewidth]{pics/Paraview_filter}
+% \item Another way of creating a selection is to pick elements right inside the 3D view: {\bf rubber-band selection}
+% \end{enumerate}
+% \end{frame}
 
 %\subsection{Performing Query-Based Selections}
 %------------------------------------------------
-\begin{frame}
-\frametitle{Query Data by Attribute Values - Find Data dialog}
-\begin{columns}
-\column{0.5\textwidth}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \centering
-  \includegraphics[width=0.8\linewidth]{pics/GUI_elements}
-\end{minipage}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \centering
-  \includegraphics[width=0.8\linewidth]{pics/Data_selection_query.png}
-\end{minipage}
-\column{0.5\textwidth}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \textbf{Some examples}
-  \begin{enumerate}
-  \item load, filter and display your volume data \includegraphics[width=0.07\linewidth]{pics/load_logo} ~
-  \includegraphics[width=0.08\linewidth]{pics/contour_logo} ~ \includegraphics[width=0.2\linewidth]{pics/apply_logo}
-  \item find data matching your criteria \includegraphics[width=0.08\linewidth]{pics/Paraview_filter}
-  \item extract selection ({\tt Run Selection Query})
-  \end{enumerate}
-\end{minipage}
-\begin{minipage}[c][0.4\textheight][c]{\linewidth}
-  \centering
-  \includegraphics[width=0.8\linewidth]{pics/Data_selection_query2}
-\end{minipage}
-\end{columns}
+\begin{frame}[t]
+\frametitle{Query Data by Attribute Values}
+\begin{center}\dCooley[-2][cyan]\end{center}
+\begin{onlyenv}<1-2>
+  \begin{center}
+    \includegraphics<1>[width=0.96\textwidth]{pics/Data_selection_query.png}
+    \includegraphics<2>[width=0.96\textwidth]{pics/Data_selection_query2}
+    %\includegraphics<3>[width=0.96\textwidth]{pics/PyNX_runtest_PascalvsMaxwell_gpu.png}
+  \end{center}
+\end{onlyenv}
 \end{frame}
+% \begin{frame}
+% \frametitle{Query Data by Attribute Values - Find Data dialog}
+% \begin{columns}
+% \column{0.5\textwidth}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \centering
+%   \includegraphics[width=0.8\linewidth]{pics/GUI_elements}
+% \end{minipage}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \centering
+%   \includegraphics[width=0.8\linewidth]{pics/Data_selection_query.png}
+% \end{minipage}
+% \column{0.5\textwidth}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \textbf{Some examples}
+%   \begin{enumerate}
+%   \item load, filter and display your volume data \includegraphics[width=0.07\linewidth]{pics/load_logo} ~
+%   \includegraphics[width=0.08\linewidth]{pics/contour_logo} ~ \includegraphics[width=0.2\linewidth]{pics/apply_logo}
+%   \item find data matching your criteria \includegraphics[width=0.08\linewidth]{pics/Paraview_filter}
+%   \item extract selection ({\tt Run Selection Query})
+%   \end{enumerate}
+% \end{minipage}
+% \begin{minipage}[c][0.4\textheight][c]{\linewidth}
+%   \centering
+%   \includegraphics[width=0.8\linewidth]{pics/Data_selection_query2}
+% \end{minipage}
+% \end{columns}
+% \end{frame}
 
 %------------------------------------------------
-
-\begin{frame}
-\frametitle{Query Data Spatially - Selection}
-    \textit{...by clicking and dragging the mouse in the 3D view}
-    \begin{columns}[c] % The "c" option specifies centered  vertical alignment while the "t" option is used for top vertical alignment
-        \column{.5\textwidth} % Left column and width
-        \begin{itemize}
-            \item {\bf Select Cells On (Surface)}: cells that are visible in the view under a rubber band
-            \item {\bf Select Points On (Surface)}: points that are visible in the view under a rubber band
-            \item {\bf Select Cells Through (Frustum)}: cells that exist under a rubber band
-            \item {\bf Select Points Through (Frustum)}
-        \end{itemize}
-        \column{.5\textwidth} % Right column and width
-        \begin{itemize}     
-            \item {\bf Select Cells with Polygon}: you draw a polygon
-            \item {\bf Select Points with Polygon}
-            \item {\bf Select Blocks}: Select blocks in a multiblock dataset
-            \item {\bf Int. Select Cells}
-            \item {\bf Int. Select Points}
-         \end{itemize}
-        % \includegraphics[width=.9999\textwidth]{pics/Filters}
-    \end{columns}
-\end{frame}
+%%% NOT USEFUL %%%
+% \begin{frame}
+% \frametitle{Query Data Spatially - Selection}
+%     \textit{...by clicking and dragging the mouse in the 3D view}
+%     \begin{columns}[c] % The "c" option specifies centered  vertical alignment while the "t" option is used for top vertical alignment
+%         \column{.5\textwidth} % Left column and width
+%         \begin{itemize}
+%             \item {\bf Select Cells On (Surface)}: cells that are visible in the view under a rubber band
+%             \item {\bf Select Points On (Surface)}: points that are visible in the view under a rubber band
+%             \item {\bf Select Cells Through (Frustum)}: cells that exist under a rubber band
+%             \item {\bf Select Points Through (Frustum)}
+%         \end{itemize}
+%         \column{.5\textwidth} % Right column and width
+%         \begin{itemize}     
+%             \item {\bf Select Cells with Polygon}: you draw a polygon
+%             \item {\bf Select Points with Polygon}
+%             \item {\bf Select Blocks}: Select blocks in a multiblock dataset
+%             \item {\bf Int. Select Cells}
+%             \item {\bf Int. Select Points}
+%          \end{itemize}
+%         % \includegraphics[width=.9999\textwidth]{pics/Filters}
+%     \end{columns}
+% \end{frame}
 
 % \begin{frame}
 % \frametitle{Table}
@@ -1557,7 +1709,7 @@ The goal of visualization is often to find the importance details within a large
 \begin{frame}
 \frametitle{Query Data Spatially - Selection}
     \textit{...by clicking and dragging the mouse in the 3D view}
-     \includegraphics[width=.9\textwidth]{pics/visual_query}
+     \includegraphics[width=.96\textwidth]{pics/visual_query}
 % \frametitle{Theorem}
 % \begin{theorem}[Mass--energy equivalence]
 % $E = mc^2$
