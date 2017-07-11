@@ -151,7 +151,7 @@
         \href{giuseppe.di-bernardo@mpcdf.mpg.de}{\textit{giuseppe.di-bernardo@mpcdf.mpg.de}}\\ % Your email address
         \raisebox{-.25\height}{\includegraphics[width=.5cm]{pics/twitter-icon-circle-blue-logo-preview.png}}\href{https://twitter.com/jose_dibernardo}{\textit{@jose\_dibernardo}} % Your twitter account
 }
-\date{\today} % Date, can be changed to a custom date
+\date{July 12, 2017} % Date, can be changed to a custom date
 
 %--------------------------------------------------------------------
 \begin{document}
@@ -591,14 +591,15 @@ that leverages the parallel compute engine in NVIDIA graphics processing units (
                 \ttfamily\footnotesize
                 {\bf import} \textcolor{red}{pycuda}.driver as \textcolor{red}{cuda}\\
                 {\bf import} \textcolor{red}{pycuda}.autoinit\\
-                {\bf import} \textcolor{red}{numpy} as \textcolor{red}{np}
-                
+                {\bf import} \textcolor{red}{numpy} as \textcolor{red}{np}\\
+                {\bf from} \textcolor{red}{pycuda}.compiler import \textcolor{red}{SourceModule}\\
+                %\vspace*{2mm}
                 a = \textcolor{red}{np}.random.randn(4,4).astype(\textcolor{red}{np}.float32)\\
                 a\_gpu = \textcolor{red}{cuda}.mem\_alloc(a.nbytes) \\
                 \# \textit{host-to-device}\\
                 \textcolor{red}{cuda}.memcpy\_htod(a\_gpu, a) \\
                 \vspace{2mm}
-                mod = \textcolor{red}{cuda}.SourceModule("""\\
+                mod = \textcolor{red}{SourceModule}("""\\
                     \tikzmarkin<1>{a}\textcolor{blue}{\_\_global\_\_ void multiply\_by\_two(float *a)\\
                     \texttt{\{}\\
                     int idx = threadIdx.x + threadIdx.y*4;\\
@@ -619,6 +620,7 @@ that leverages the parallel compute engine in NVIDIA graphics processing units (
 %             \end{column}
         \end{columns}
 \end{frame}
+% 1. PyCUDA is a Python scripting language wrapper around the CUDA C extension to the C programming language. PyOpenCL is the analogous wrapper around OpenCL for Python. 
 %------------------------------------------------
 
 \begin{frame}
@@ -626,10 +628,10 @@ that leverages the parallel compute engine in NVIDIA graphics processing units (
         \ttfamily\footnotesize
         {\bf import} \textcolor{red}{numpy} as \textcolor{red}{np}\\
         {\bf import} \textcolor{red}{pycuda}.autoinit\\
-        {\bf import} \textcolor{red}{pycuda}.gpuarray as gpuarray \\
+        {\bf import} \textcolor{red}{pycuda}.gpuarray as \textcolor{red}{gpuarray} \\
         \vspace{.5mm}
      
-        a\_gpu = gpuarray.to\_gpu(\textcolor{red}{np}.random.randn(4,4).astype(np.float32))\\
+        a\_gpu = \textcolor{red}{gpuarray}.to\_gpu(\textcolor{red}{np}.random.randn(4,4).astype(\textcolor{red}{np}.float32))\\
         a\_doubled = (2*a\_gpu).get() \\ 
         {\bf print} a\_doubled\\
         {\bf print} a\_gpu   
@@ -666,41 +668,6 @@ A two-fold aim:
 \end{figure}
 \end{frame}
 
-%--------------------------------------------------------------------
-
-\begin{frame}
-\frametitle{PyCUDA: Vital Information}
-\begin{columns}
-    \begin{column}{.65\textwidth}
-        \begin{itemize}
-            \item Availability: \href{https://pypi.python.org/pypi/pycuda}{Freely down-loadable from this location}
-                \begin{itemize}
-                    \item Open source
-                    \item MIT Licensed  
-                \end{itemize}  
-            \item requires {\bf NumPy}, Python 2.4+ (Win/OS X/Linux)
-            \item Support via mailing list
-            \item For further information see:
-                \begin{itemize}
-                    \item \href{https://mathema.tician.de/software/pycuda/}{Main PyCUDA page}
-                   \item \href{https://wiki.tiker.net/PyCuda}{PyCUDA Wiki}
-                   \item \href{https://wiki.tiker.net/PyCuda/FrequentlyAskedQuestions}{PyCUDA FAQ}
-                \end{itemize}
-        \end{itemize}        
-    \end{column}
-    \begin{column}{.45\textwidth}
-        \begin{figure}
-            \begin{minipage}{0.65\textwidth}
-                \includegraphics[width=1.1\textwidth]{pics/pycuda_vital}
-                \caption{courtesy by A. Kl\"{o}ckner, Nvidia GTC 2010}
-            \end{minipage}
-        \end{figure}   
-    \end{column}
-    \hspace*{-2cm}
-\end{columns}
-\end{frame}
-
-%--------------------------------------------------------------------
 %====================================================================
 % The PyCUDA philosophy
 %{\bf PyCUDA} gives you easy, Pythonic \underline{complete} access to Nvidia's CUDA parallel computation API. \\ Some PyCUDA \textbf{features}:
@@ -713,8 +680,8 @@ A two-fold aim:
         \begin{columns}
             \begin{column}{.7\textwidth}
                 \begin{itemize}
-                    \item \visible<3->{{\bf Robustness}: automatic management of object lifetimes and  error checking} %{Automatically manage resources}
-                    \item \visible<4->{{\bf Completeness}: automatic error checking}
+                    \item \visible<3->{{\bf Robustness}: automatic management of object lifetimes and error checking} %{Automatically manage resources}
+                    \item \visible<4->{{\bf Completeness}: full power of CUDA’s driver API at your disposal}
                           %Check for and report errors automatically}
                     \item \visible<5->{{\bf Convenience}: provide abstractions (comes with ready-made on-GPU linear algebra, reduction, scan. Add-on packages for FFT and LAPACK available.)} % high-level of abstractions: GPUArray for example
                     \item \visible<6->{Integrate tightly with \texttt{\bf NumPy}}
@@ -750,7 +717,8 @@ A two-fold aim:
 % 3. Object cleanup tied to lifetime of objects. This idiom, often called RAII in C++, makes it much easier to write correct, leak- and crash-free code. 
 % PyCUDA knows about dependencies, too, so (for example) it won’t detach from a context before all memory allocated in it is also freed.
 % Automatic Error Checking. All CUDA errors are automatically translated into Python exceptions.
-% (e.g., \texttt{pycuda.compiler.SourceModule} and \texttt{pycuda.gpuarray.GPUArray}) % Convenience. Abstractions like pycuda.compiler.SourceModule and pycuda.gpuarray.GPUArray make CUDA programming even more convenient than with Nvidia’s C-based runtime.
+% (e.g., \texttt{pycuda.compiler.SourceModule} and \texttt{pycuda.gpuarray.GPUArray}) 
+% Convenience. Abstractions like pycuda.compiler.SourceModule and pycuda.gpuarray.GPUArray make CUDA programming even more convenient than with Nvidia’s C-based runtime.
 % Speed. PyCUDA’s base layer is written in C++, so all the niceties above are virtually free.
 % Helpful Documentation.
 
@@ -786,6 +754,41 @@ A two-fold aim:
 % \end{figure}
 % \end{frame}
 
+%--------------------------------------------------------------------
+
+\begin{frame}
+\frametitle{PyCUDA: Vital Information}
+\begin{columns}
+    \begin{column}{.65\textwidth}
+        \begin{itemize}
+            \item Availability: \href{https://pypi.python.org/pypi/pycuda}{Freely down-loadable from this location}
+                \begin{itemize}
+                    \item Open source
+                    \item MIT Licensed  
+                \end{itemize}  
+            \item requires {\bf NumPy}, Python 2.4+ (Win/OS X/Linux)
+            \item Support via mailing list
+            \item For further information see:
+                \begin{itemize}
+                    \item \href{https://mathema.tician.de/software/pycuda/}{Main PyCUDA page}
+                   \item \href{https://wiki.tiker.net/PyCuda}{PyCUDA Wiki}
+                   \item \href{https://wiki.tiker.net/PyCuda/FrequentlyAskedQuestions}{PyCUDA FAQ}
+                \end{itemize}
+        \end{itemize}        
+    \end{column}
+    \begin{column}{.45\textwidth}
+        \begin{figure}
+            \begin{minipage}{0.65\textwidth}
+                \includegraphics[width=1.1\textwidth]{pics/pycuda_vital}
+                \caption{courtesy by A. Kl\"{o}ckner, Nvidia GTC 2010}
+            \end{minipage}
+        \end{figure}   
+    \end{column}
+    \hspace*{-2cm}
+\end{columns}
+\end{frame}
+
+%--------------------------------------------------------------------
 %--------------------------------------------------------------------
 \subsection{PyNX: A Python-based approach to GPU computing} 
 
@@ -828,7 +831,7 @@ PyNX aims to help computing scattering (X-ray or neutrons) maps for atomic struc
                 \end{itemize}  
         \end{itemize}
                 \begin{block}{GPU-accelerated applications}
-        \small \textcolor{blue}{PyNX provides fast parallel computation of \textit{scattering from large assemblies of atoms} ($\gg 10^{8}$ atoms) and \textbf{1D}, \textbf{2D} or \textbf{3D} coordinates ($\gg 10^{6}$ grid points) in \textit{reciprocal latticespace}.}
+        \small \textcolor{blue}{PyNX provides fast parallel computation of \textit{scattering from large assemblies of atoms} ($\gg 10^{8}$ atoms) and \textbf{1D}, \textbf{2D} or \textbf{3D} coordinates ($\gg 10^{6}$ grid points) in \textit{reciprocal lattice space}.}
         \end{block}
         \vspace*{-0.31cm}
     \end{column}
@@ -1304,21 +1307,6 @@ gridToVTK("/viz/vtk/" + filename, h, k, l, pointData = {"pow_spec" : pow_spec})
 % # **************************************************************
 
 \begin{frame}
-ParaView was designed primarily to handle data with spatial representation. Thus the {\bf data types} used in ParaView are meshes\footnotemark 
-\frametitle{ParaView: The dataset types (sampling structures)}
-    \includegraphics[width=.88\textwidth]{pics/vtk_dataformat}
-\footnotetext[9]{\footnotesize MPCDF has no self-interests nor any conflict of interest}
-\end{frame}
-
-%--------------------------------------------------------------------
-\subsection{Getting started with ParaView} 
-% Sections can be created in order to organize your presentation into discrete blocks, 
-%all sections and subsections are automatically printed in the table of contents as an overview of the talk
-%--------------------------------------------------------------------
-
-%\subsection{Introduction} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
-
-\begin{frame}
     \frametitle{What is ParaView?}
         \begin{itemize}
             \item ParaView is an \textbf{open-source application} and \textbf{architecture display} and analysis of scientific data sets;
@@ -1339,9 +1327,23 @@ ParaView was designed primarily to handle data with spatial representation. Thus
 %--------------------------------------------------------------------
 
 \begin{frame}
+ParaView was designed primarily to handle data with spatial representation. Thus the {\bf data types} used in ParaView are meshes
+\frametitle{ParaView: The dataset types (sampling structures)}
+    \includegraphics[width=.88\textwidth]{pics/vtk_dataformat}
+\end{frame}
+
+%--------------------------------------------------------------------
+\subsection{Getting started with ParaView} 
+% Sections can be created in order to organize your presentation into discrete blocks, 
+%all sections and subsections are automatically printed in the table of contents as an overview of the talk
+%--------------------------------------------------------------------
+
+%\subsection{Introduction} % A subsection can be created just before a set of slides with a common theme to further break down your presentation into chunks
+
+\begin{frame}
 \frametitle{ParaView: a standard de-facto}
     \begin{itemize}
-        \item ParaView is primarily developed and published by Kitware Inc. 
+        \item ParaView is primarily developed and published by Kitware Inc.\footnotemark  
               \begin{itemize}
               \item A flexible BSD 3-clause license;
               \item Commercial maintenance and support; 
@@ -1350,8 +1352,9 @@ ParaView was designed primarily to handle data with spatial representation. Thus
         \item ParaView is downloaded roughly 100,000 times every year; 
         \item ParaView also won the HPCwire Readers' Choice Award and HPCwire Editors' Choice Award for Best HPC Visualization Product or Technology. 
     \end{itemize}    
-     \includegraphics[width=0.2\textwidth]{pics/ECA_Vis}
-     \vspace*{1cm}
+     \hspace*{1cm}\includegraphics[width=0.15\textwidth]{pics/ECA_Vis}
+     %\vspace*{1cm}
+     \footnotetext[9]{\footnotesize MPCDF has no self-interests nor any conflict of interest}
 \end{frame}
 
 %--------------------------------------------------------------------
@@ -1719,7 +1722,7 @@ renderView1.CameraParallelScale = 1.9052559296210743
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Hands-On: extract the tuple of radius and angles}
+\frametitle{Next: extract the tuple of radius and angles}
 % \tdplotsetmaincoords{70}{110}
 % \begin{tikzpicture}[tdplot_main_coords]
 % \draw[thick,->] (0,0,0) -- (3,0,0) node[anchor=north east]{$x$};
@@ -1892,7 +1895,7 @@ renderView1.CameraParallelScale = 1.9052559296210743
 %------------------------------------------------
 
 \begin{frame}
-\Huge{\centerline{The End}}
+\Huge{\centerline{Thank you for the attention!}}
 \end{frame}
 
 %----------------------------------------------------------------------------------------
